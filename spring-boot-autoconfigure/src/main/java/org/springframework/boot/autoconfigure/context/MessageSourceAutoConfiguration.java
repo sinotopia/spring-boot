@@ -152,7 +152,7 @@ public class MessageSourceAutoConfiguration {
 
 		@Override
 		public ConditionOutcome getMatchOutcome(ConditionContext context,
-				AnnotatedTypeMetadata metadata) {
+												AnnotatedTypeMetadata metadata) {
 			String basename = context.getEnvironment()
 					.getProperty("spring.messages.basename", "messages");
 			ConditionOutcome outcome = cache.get(basename);
@@ -164,7 +164,7 @@ public class MessageSourceAutoConfiguration {
 		}
 
 		private ConditionOutcome getMatchOutcomeForBasename(ConditionContext context,
-				String basename) {
+															String basename) {
 			ConditionMessage.Builder message = ConditionMessage
 					.forCondition("ResourceBundle");
 			for (String name : StringUtils.commaDelimitedListToStringArray(
@@ -185,8 +185,7 @@ public class MessageSourceAutoConfiguration {
 			try {
 				return new PathMatchingResourcePatternResolver(classLoader)
 						.getResources("classpath*:" + target + ".properties");
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				return NO_RESOURCES;
 			}
 		}

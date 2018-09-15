@@ -53,12 +53,12 @@ class EnableConfigurationPropertiesImportSelector implements ImportSelector {
 		Object[] type = attributes == null ? null
 				: (Object[]) attributes.getFirst("value");
 		if (type == null || type.length == 0) {
-			return new String[] {
+			return new String[]{
 					ConfigurationPropertiesBindingPostProcessorRegistrar.class
-							.getName() };
+							.getName()};
 		}
-		return new String[] { ConfigurationPropertiesBeanRegistrar.class.getName(),
-				ConfigurationPropertiesBindingPostProcessorRegistrar.class.getName() };
+		return new String[]{ConfigurationPropertiesBeanRegistrar.class.getName(),
+				ConfigurationPropertiesBindingPostProcessorRegistrar.class.getName()};
 	}
 
 	/**
@@ -69,7 +69,7 @@ class EnableConfigurationPropertiesImportSelector implements ImportSelector {
 
 		@Override
 		public void registerBeanDefinitions(AnnotationMetadata metadata,
-				BeanDefinitionRegistry registry) {
+											BeanDefinitionRegistry registry) {
 			MultiValueMap<String, Object> attributes = metadata
 					.getAllAnnotationAttributes(
 							EnableConfigurationProperties.class.getName(), false);
@@ -106,7 +106,7 @@ class EnableConfigurationPropertiesImportSelector implements ImportSelector {
 		}
 
 		private void registerBeanDefinition(BeanDefinitionRegistry registry,
-				Class<?> type, String name) {
+											Class<?> type, String name) {
 			BeanDefinitionBuilder builder = BeanDefinitionBuilder
 					.genericBeanDefinition(type);
 			AbstractBeanDefinition beanDefinition = builder.getBeanDefinition();
