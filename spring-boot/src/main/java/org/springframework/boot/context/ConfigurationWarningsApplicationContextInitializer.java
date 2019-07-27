@@ -63,10 +63,11 @@ public class ConfigurationWarningsApplicationContextInitializer
 
 	/**
 	 * Returns the checks that should be applied.
+	 *
 	 * @return the checks to apply
 	 */
 	protected Check[] getChecks() {
-		return new Check[] { new ComponentScanPackageCheck() };
+		return new Check[]{new ComponentScanPackageCheck()};
 	}
 
 	/**
@@ -118,6 +119,7 @@ public class ConfigurationWarningsApplicationContextInitializer
 
 		/**
 		 * Returns a warning if the check fails or {@code null} if there are no problems.
+		 *
 		 * @param registry the {@link BeanDefinitionRegistry}
 		 * @return a warning message or {@code null}
 		 */
@@ -168,7 +170,7 @@ public class ConfigurationWarningsApplicationContextInitializer
 		}
 
 		private void addComponentScanningPackages(Set<String> packages,
-				AnnotationMetadata metadata) {
+												  AnnotationMetadata metadata) {
 			AnnotationAttributes attributes = AnnotationAttributes.fromMap(metadata
 					.getAnnotationAttributes(ComponentScan.class.getName(), true));
 			if (attributes != null) {

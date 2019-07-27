@@ -86,8 +86,7 @@ public class DelegatingApplicationListener
 							+ className + "] must implement ApplicationListener");
 					listeners.add((ApplicationListener<ApplicationEvent>) BeanUtils
 							.instantiateClass(clazz));
-				}
-				catch (Exception ex) {
+				} catch (Exception ex) {
 					throw new ApplicationContextException(
 							"Failed to load context listener class [" + className + "]",
 							ex);

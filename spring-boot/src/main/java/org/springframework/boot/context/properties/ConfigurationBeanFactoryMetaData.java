@@ -69,7 +69,7 @@ public class ConfigurationBeanFactoryMetaData implements BeanFactoryPostProcesso
 	}
 
 	public <A extends Annotation> A findFactoryAnnotation(String beanName,
-			Class<A> type) {
+														  Class<A> type) {
 		Method method = findFactoryMethod(beanName);
 		return (method == null ? null : AnnotationUtils.findAnnotation(method, type));
 	}

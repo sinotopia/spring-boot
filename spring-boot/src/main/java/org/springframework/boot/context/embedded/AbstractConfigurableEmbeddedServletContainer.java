@@ -97,6 +97,7 @@ public abstract class AbstractConfigurableEmbeddedServletContainer
 	/**
 	 * Create a new {@link AbstractConfigurableEmbeddedServletContainer} instance with the
 	 * specified port.
+	 *
 	 * @param port the port number for the embedded servlet container
 	 */
 	public AbstractConfigurableEmbeddedServletContainer(int port) {
@@ -106,8 +107,9 @@ public abstract class AbstractConfigurableEmbeddedServletContainer
 	/**
 	 * Create a new {@link AbstractConfigurableEmbeddedServletContainer} instance with the
 	 * specified context path and port.
+	 *
 	 * @param contextPath the context path for the embedded servlet container
-	 * @param port the port number for the embedded servlet container
+	 * @param port        the port number for the embedded servlet container
 	 */
 	public AbstractConfigurableEmbeddedServletContainer(String contextPath, int port) {
 		checkContextPath(contextPath);
@@ -138,6 +140,7 @@ public abstract class AbstractConfigurableEmbeddedServletContainer
 	/**
 	 * Returns the context path for the embedded servlet container. The path will start
 	 * with "/" and not end with "/". The root context is represented by an empty string.
+	 *
 	 * @return the context path
 	 */
 	public String getContextPath() {
@@ -160,6 +163,7 @@ public abstract class AbstractConfigurableEmbeddedServletContainer
 
 	/**
 	 * The port that the embedded server listens on.
+	 *
 	 * @return the port
 	 */
 	public int getPort() {
@@ -173,6 +177,7 @@ public abstract class AbstractConfigurableEmbeddedServletContainer
 
 	/**
 	 * Return the address that the embedded container binds to.
+	 *
 	 * @return the address
 	 */
 	public InetAddress getAddress() {
@@ -192,6 +197,7 @@ public abstract class AbstractConfigurableEmbeddedServletContainer
 
 	/**
 	 * Return the session timeout in seconds.
+	 *
 	 * @return the timeout in seconds
 	 */
 	public int getSessionTimeout() {
@@ -236,6 +242,7 @@ public abstract class AbstractConfigurableEmbeddedServletContainer
 	/**
 	 * Returns the document root which will be used by the web context to serve static
 	 * files.
+	 *
 	 * @return the document root
 	 */
 	public File getDocumentRoot() {
@@ -257,6 +264,7 @@ public abstract class AbstractConfigurableEmbeddedServletContainer
 	/**
 	 * Returns a mutable set of {@link ErrorPage ErrorPages} that will be used when
 	 * handling exceptions.
+	 *
 	 * @return the error pages
 	 */
 	public Set<ErrorPage> getErrorPages() {
@@ -270,6 +278,7 @@ public abstract class AbstractConfigurableEmbeddedServletContainer
 
 	/**
 	 * Returns the mime-type mappings.
+	 *
 	 * @return the mimeMappings the mime-type mappings.
 	 */
 	public MimeMappings getMimeMappings() {
@@ -283,6 +292,7 @@ public abstract class AbstractConfigurableEmbeddedServletContainer
 
 	/**
 	 * Flag to indicate that the default servlet should be registered.
+	 *
 	 * @return true if the default servlet is to be registered
 	 */
 	public boolean isRegisterDefaultServlet() {
@@ -336,6 +346,7 @@ public abstract class AbstractConfigurableEmbeddedServletContainer
 
 	/**
 	 * Return the Locale to Charset mappings.
+	 *
 	 * @return the charset mappings
 	 */
 	public Map<Locale, Charset> getLocaleCharsetMappings() {
@@ -351,6 +362,7 @@ public abstract class AbstractConfigurableEmbeddedServletContainer
 	/**
 	 * Utility method that can be used by subclasses wishing to combine the specified
 	 * {@link ServletContextInitializer} parameters with those defined in this instance.
+	 *
 	 * @param initializers the initializers to merge
 	 * @return a complete set of merged initializers (with the specified parameters
 	 * appearing first)
@@ -367,6 +379,7 @@ public abstract class AbstractConfigurableEmbeddedServletContainer
 	/**
 	 * Returns whether or not the JSP servlet should be registered with the embedded
 	 * container.
+	 *
 	 * @return {@code true} if the container should be registered, otherwise {@code false}
 	 */
 	protected boolean shouldRegisterJspServlet() {

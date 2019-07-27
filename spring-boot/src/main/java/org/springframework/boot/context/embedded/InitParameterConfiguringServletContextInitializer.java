@@ -29,8 +29,8 @@ import org.springframework.boot.web.servlet.ServletContextInitializer;
  * {@code ServletContext}.
  *
  * @author Andy Wilkinson
- * @since 1.2.0
  * @see ServletContext#setInitParameter(String, String)
+ * @since 1.2.0
  */
 public class InitParameterConfiguringServletContextInitializer
 		implements ServletContextInitializer {

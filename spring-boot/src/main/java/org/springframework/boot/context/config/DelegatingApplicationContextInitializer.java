@@ -74,15 +74,14 @@ public class DelegatingApplicationContextInitializer implements
 					ClassUtils.getDefaultClassLoader());
 			Assert.isAssignable(ApplicationContextInitializer.class, initializerClass);
 			return initializerClass;
-		}
-		catch (ClassNotFoundException ex) {
+		} catch (ClassNotFoundException ex) {
 			throw new ApplicationContextException(
 					"Failed to load context initializer class [" + className + "]", ex);
 		}
 	}
 
 	private void applyInitializerClasses(ConfigurableApplicationContext context,
-			List<Class<?>> initializerClasses) {
+										 List<Class<?>> initializerClasses) {
 		Class<?> contextClass = context.getClass();
 		List<ApplicationContextInitializer<?>> initializers = new ArrayList<ApplicationContextInitializer<?>>();
 		for (Class<?> initializerClass : initializerClasses) {
@@ -92,7 +91,7 @@ public class DelegatingApplicationContextInitializer implements
 	}
 
 	private ApplicationContextInitializer<?> instantiateInitializer(Class<?> contextClass,
-			Class<?> initializerClass) {
+																	Class<?> initializerClass) {
 		Class<?> requireContextClass = GenericTypeResolver.resolveTypeArgument(
 				initializerClass, ApplicationContextInitializer.class);
 		Assert.isAssignable(requireContextClass, contextClass,
@@ -107,9 +106,9 @@ public class DelegatingApplicationContextInitializer implements
 				.instantiateClass(initializerClass);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	private void applyInitializers(ConfigurableApplicationContext context,
-			List<ApplicationContextInitializer<?>> initializers) {
+								   List<ApplicationContextInitializer<?>> initializers) {
 		Collections.sort(initializers, new AnnotationAwareOrderComparator());
 		for (ApplicationContextInitializer initializer : initializers) {
 			initializer.initialize(context);

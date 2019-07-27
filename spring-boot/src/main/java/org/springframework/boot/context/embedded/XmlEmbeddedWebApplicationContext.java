@@ -51,6 +51,7 @@ public class XmlEmbeddedWebApplicationContext extends EmbeddedWebApplicationCont
 	/**
 	 * Create a new {@link XmlEmbeddedWebApplicationContext}, loading bean definitions
 	 * from the given resources and automatically refreshing the context.
+	 *
 	 * @param resources the resources to load from
 	 */
 	public XmlEmbeddedWebApplicationContext(Resource... resources) {
@@ -61,6 +62,7 @@ public class XmlEmbeddedWebApplicationContext extends EmbeddedWebApplicationCont
 	/**
 	 * Create a new {@link XmlEmbeddedWebApplicationContext}, loading bean definitions
 	 * from the given resource locations and automatically refreshing the context.
+	 *
 	 * @param resourceLocations the resources to load from
 	 */
 	public XmlEmbeddedWebApplicationContext(String... resourceLocations) {
@@ -71,18 +73,20 @@ public class XmlEmbeddedWebApplicationContext extends EmbeddedWebApplicationCont
 	/**
 	 * Create a new {@link XmlEmbeddedWebApplicationContext}, loading bean definitions
 	 * from the given resource locations and automatically refreshing the context.
+	 *
 	 * @param relativeClass class whose package will be used as a prefix when loading each
-	 * specified resource name
+	 *                      specified resource name
 	 * @param resourceNames relatively-qualified names of resources to load
 	 */
 	public XmlEmbeddedWebApplicationContext(Class<?> relativeClass,
-			String... resourceNames) {
+											String... resourceNames) {
 		load(relativeClass, resourceNames);
 		refresh();
 	}
 
 	/**
 	 * Set whether to use XML validation. Default is {@code true}.
+	 *
 	 * @param validating if validating the XML
 	 */
 	public void setValidating(boolean validating) {
@@ -103,6 +107,7 @@ public class XmlEmbeddedWebApplicationContext extends EmbeddedWebApplicationCont
 
 	/**
 	 * Load bean definitions from the given XML resources.
+	 *
 	 * @param resources one or more resources to load from
 	 */
 	public final void load(Resource... resources) {
@@ -111,6 +116,7 @@ public class XmlEmbeddedWebApplicationContext extends EmbeddedWebApplicationCont
 
 	/**
 	 * Load bean definitions from the given XML resources.
+	 *
 	 * @param resourceLocations one or more resource locations to load from
 	 */
 	public final void load(String... resourceLocations) {
@@ -119,8 +125,9 @@ public class XmlEmbeddedWebApplicationContext extends EmbeddedWebApplicationCont
 
 	/**
 	 * Load bean definitions from the given XML resources.
+	 *
 	 * @param relativeClass class whose package will be used as a prefix when loading each
-	 * specified resource name
+	 *                      specified resource name
 	 * @param resourceNames relatively-qualified names of resources to load
 	 */
 	public final void load(Class<?> relativeClass, String... resourceNames) {

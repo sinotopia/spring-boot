@@ -31,7 +31,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
  * @author Dave Syer
  */
 @Qualifier
-@Target({ ElementType.TYPE, ElementType.METHOD })
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface ConfigurationPropertiesBinding {

@@ -191,7 +191,7 @@ public class ConfigFileApplicationListener
 
 	@Override
 	public void postProcessEnvironment(ConfigurableEnvironment environment,
-			SpringApplication application) {
+									   SpringApplication application) {
 		addPropertySources(environment, application.getResourceLoader());
 		configureIgnoreBeanInfo(environment);
 		bindToSpringApplication(environment, application);
@@ -215,23 +215,25 @@ public class ConfigFileApplicationListener
 
 	/**
 	 * Add config file property sources to the specified environment.
-	 * @param environment the environment to add source to
+	 *
+	 * @param environment    the environment to add source to
 	 * @param resourceLoader the resource loader
 	 * @see #addPostProcessors(ConfigurableApplicationContext)
 	 */
 	protected void addPropertySources(ConfigurableEnvironment environment,
-			ResourceLoader resourceLoader) {
+									  ResourceLoader resourceLoader) {
 		RandomValuePropertySource.addToEnvironment(environment);
 		new Loader(environment, resourceLoader).load();
 	}
 
 	/**
 	 * Bind the environment to the {@link SpringApplication}.
+	 *
 	 * @param environment the environment to bind
 	 * @param application the application to bind to
 	 */
 	protected void bindToSpringApplication(ConfigurableEnvironment environment,
-			SpringApplication application) {
+										   SpringApplication application) {
 		PropertiesConfigurationFactory<SpringApplication> binder = new PropertiesConfigurationFactory<SpringApplication>(
 				application);
 		binder.setTargetName("spring.main");
@@ -239,14 +241,14 @@ public class ConfigFileApplicationListener
 		binder.setPropertySources(environment.getPropertySources());
 		try {
 			binder.bindPropertiesToTarget();
-		}
-		catch (BindException ex) {
+		} catch (BindException ex) {
 			throw new IllegalStateException("Cannot bind to SpringApplication", ex);
 		}
 	}
 
 	/**
 	 * Add appropriate post-processors to post-configure the property-sources.
+	 *
 	 * @param context the context to configure
 	 */
 	protected void addPostProcessors(ConfigurableApplicationContext context) {
@@ -270,6 +272,7 @@ public class ConfigFileApplicationListener
 	 * profiles (if any) plus file extensions supported by the properties loaders.
 	 * Locations are considered in the order specified, with later items taking precedence
 	 * (like a map merge).
+	 *
 	 * @param locations the search locations
 	 */
 	public void setSearchLocations(String locations) {
@@ -280,6 +283,7 @@ public class ConfigFileApplicationListener
 	/**
 	 * Sets the names of the files that should be loaded (excluding file extension) as a
 	 * comma-separated list.
+	 *
 	 * @param names the names to load
 	 */
 	public void setSearchNames(String names) {
@@ -380,8 +384,7 @@ public class ConfigFileApplicationListener
 						// location is a filename already, so don't search for more
 						// filenames
 						load(location, null, profile);
-					}
-					else {
+					} else {
 						for (String name : getSearchNames()) {
 							load(location, name, profile);
 						}
@@ -417,8 +420,9 @@ public class ConfigFileApplicationListener
 		 * <p>
 		 * Concretely, if the "cloud" profile is enabled via the environment, it will take
 		 * less precedence that any profile set via the {@link #ACTIVE_PROFILES_PROPERTY}.
+		 *
 		 * @param initialActiveProfiles the profiles that have been enabled via
-		 * {@link #ACTIVE_PROFILES_PROPERTY}
+		 *                              {@link #ACTIVE_PROFILES_PROPERTY}
 		 * @return the unprocessed active profiles from the environment to enable
 		 */
 		private List<Profile> getUnprocessedActiveProfiles(
@@ -441,8 +445,7 @@ public class ConfigFileApplicationListener
 			if (!StringUtils.hasText(name)) {
 				// Try to load directly from the location
 				loadIntoGroup(group, location, profile);
-			}
-			else {
+			} else {
 				// Search for a file with the given name
 				for (String ext : this.propertiesLoader.getAllFileExtensions()) {
 					if (profile != null) {
@@ -468,11 +471,10 @@ public class ConfigFileApplicationListener
 		}
 
 		private PropertySource<?> loadIntoGroup(String identifier, String location,
-				Profile profile) {
+												Profile profile) {
 			try {
 				return doLoadIntoGroup(identifier, location, profile);
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				throw new IllegalStateException(
 						"Failed to load property source from location '" + location + "'",
 						ex);
@@ -480,7 +482,7 @@ public class ConfigFileApplicationListener
 		}
 
 		private PropertySource<?> doLoadIntoGroup(String identifier, String location,
-				Profile profile) throws IOException {
+												  Profile profile) throws IOException {
 			Resource resource = this.resourceLoader.getResource(location);
 			PropertySource<?> propertySource = null;
 			StringBuilder msg = new StringBuilder();
@@ -492,12 +494,10 @@ public class ConfigFileApplicationListener
 				if (propertySource != null) {
 					msg.append("Loaded ");
 					handleProfileProperties(propertySource);
-				}
-				else {
+				} else {
 					msg.append("Skipped (empty) ");
 				}
-			}
-			else {
+			} else {
 				msg.append("Skipped ");
 			}
 			msg.append("config file ");
@@ -508,8 +508,7 @@ public class ConfigFileApplicationListener
 			if (resource == null || !resource.exists()) {
 				msg.append(" resource not found");
 				this.logger.trace(msg);
-			}
-			else {
+			} else {
 				this.logger.debug(msg);
 			}
 			return propertySource;
@@ -521,8 +520,7 @@ public class ConfigFileApplicationListener
 				try {
 					resourceDescription = String.format("'%s' (%s)",
 							resource.getURI().toASCIIString(), location);
-				}
-				catch (IOException ex) {
+				} catch (IOException ex) {
 					// Use the location as the description
 				}
 			}
@@ -578,7 +576,7 @@ public class ConfigFileApplicationListener
 
 		private void removeUnprocessedDefaultProfiles() {
 			for (Iterator<Profile> iterator = this.profiles.iterator(); iterator
-					.hasNext();) {
+					.hasNext(); ) {
 				if (iterator.next().isDefaultProfile()) {
 					iterator.remove();
 				}
@@ -606,7 +604,7 @@ public class ConfigFileApplicationListener
 		}
 
 		private void prependProfile(ConfigurableEnvironment environment,
-				Profile profile) {
+									Profile profile) {
 			Set<String> profiles = new LinkedHashSet<String>();
 			environment.getActiveProfiles(); // ensure they are initialized
 			// But this one should go first (last wins in a property key clash)
@@ -667,8 +665,7 @@ public class ConfigFileApplicationListener
 					.getPropertySources();
 			if (existingSources.contains(DEFAULT_PROPERTIES)) {
 				existingSources.addBefore(DEFAULT_PROPERTIES, configurationSources);
-			}
-			else {
+			} else {
 				existingSources.addLast(configurationSources);
 			}
 		}
@@ -769,8 +766,7 @@ public class ConfigFileApplicationListener
 							propertySources.addAfter(name, nested);
 							name = nested.getName();
 						}
-					}
-					else {
+					} else {
 						propertySources.addAfter(name, propertySource);
 					}
 				}

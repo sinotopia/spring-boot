@@ -22,13 +22,14 @@ import io.undertow.Undertow.Builder;
  * Callback interface that can be used to customize an Undertow {@link Builder}.
  *
  * @author Andy Wilkinson
- * @since 1.2.0
  * @see UndertowEmbeddedServletContainerFactory
+ * @since 1.2.0
  */
 public interface UndertowBuilderCustomizer {
 
 	/**
 	 * Customize the builder.
+	 *
 	 * @param builder the {@code Builder} to customize
 	 */
 	void customize(Builder builder);

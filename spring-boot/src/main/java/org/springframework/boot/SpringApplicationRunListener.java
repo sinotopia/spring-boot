@@ -42,6 +42,7 @@ public interface SpringApplicationRunListener {
 	/**
 	 * Called once the environment has been prepared, but before the
 	 * {@link ApplicationContext} has been created.
+	 *
 	 * @param environment the environment
 	 */
 	void environmentPrepared(ConfigurableEnvironment environment);
@@ -49,6 +50,7 @@ public interface SpringApplicationRunListener {
 	/**
 	 * Called once the {@link ApplicationContext} has been created and prepared, but
 	 * before sources have been loaded.
+	 *
 	 * @param context the application context
 	 */
 	void contextPrepared(ConfigurableApplicationContext context);
@@ -56,14 +58,16 @@ public interface SpringApplicationRunListener {
 	/**
 	 * Called once the application context has been loaded but before it has been
 	 * refreshed.
+	 *
 	 * @param context the application context
 	 */
 	void contextLoaded(ConfigurableApplicationContext context);
 
 	/**
 	 * Called immediately before the run method finishes.
-	 * @param context the application context or null if a failure occurred before the
-	 * context was created
+	 *
+	 * @param context   the application context or null if a failure occurred before the
+	 *                  context was created
 	 * @param exception any run exception or null if run completed successfully.
 	 */
 	void finished(ConfigurableApplicationContext context, Throwable exception);

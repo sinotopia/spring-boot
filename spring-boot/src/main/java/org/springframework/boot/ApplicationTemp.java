@@ -47,6 +47,7 @@ public class ApplicationTemp {
 
 	/**
 	 * Create a new {@link ApplicationTemp} instance for the specified source class.
+	 *
 	 * @param sourceClass the source class or {@code null}
 	 */
 	public ApplicationTemp(Class<?> sourceClass) {
@@ -60,6 +61,7 @@ public class ApplicationTemp {
 
 	/**
 	 * Return a sub-directory of the application temp.
+	 *
 	 * @param subDir the sub-directory name
 	 * @return a sub-directory
 	 */
@@ -71,6 +73,7 @@ public class ApplicationTemp {
 
 	/**
 	 * Return the directory to be used for application specific temp files.
+	 *
 	 * @return the application temp directory
 	 */
 	public File getDir() {
@@ -108,8 +111,7 @@ public class ApplicationTemp {
 			update(digest, System.getProperty("sun.java.command"));
 			update(digest, System.getProperty("sun.boot.class.path"));
 			return digest.digest();
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			throw new IllegalStateException(ex);
 		}
 	}

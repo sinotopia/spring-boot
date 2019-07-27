@@ -40,6 +40,7 @@ public class EmbeddedServletContainerInitializedEvent extends ApplicationEvent {
 
 	/**
 	 * Access the {@link EmbeddedServletContainer}.
+	 *
 	 * @return the embedded servlet container
 	 */
 	public EmbeddedServletContainer getEmbeddedServletContainer() {
@@ -48,6 +49,7 @@ public class EmbeddedServletContainerInitializedEvent extends ApplicationEvent {
 
 	/**
 	 * Access the source of the event (an {@link EmbeddedServletContainer}).
+	 *
 	 * @return the embedded servlet container
 	 */
 	@Override
@@ -59,6 +61,7 @@ public class EmbeddedServletContainerInitializedEvent extends ApplicationEvent {
 	 * Access the application context that the container was created in. Sometimes it is
 	 * prudent to check that this matches expectations (like being equal to the current
 	 * context) before acting on the server container itself.
+	 *
 	 * @return the applicationContext that the container was created from
 	 */
 	public EmbeddedWebApplicationContext getApplicationContext() {

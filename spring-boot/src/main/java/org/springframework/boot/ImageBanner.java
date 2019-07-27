@@ -51,9 +51,9 @@ public class ImageBanner implements Banner {
 
 	private static final Log logger = LogFactory.getLog(ImageBanner.class);
 
-	private static final double[] RGB_WEIGHT = { 0.2126d, 0.7152d, 0.0722d };
+	private static final double[] RGB_WEIGHT = {0.2126d, 0.7152d, 0.0722d};
 
-	private static final char[] PIXEL = { ' ', '.', '*', ':', 'o', '&', '8', '#', '@' };
+	private static final char[] PIXEL = {' ', '.', '*', ':', 'o', '&', '8', '#', '@'};
 
 	private static final int LUMINANCE_INCREMENT = 10;
 
@@ -69,22 +69,19 @@ public class ImageBanner implements Banner {
 
 	@Override
 	public void printBanner(Environment environment, Class<?> sourceClass,
-			PrintStream out) {
+							PrintStream out) {
 		String headless = System.getProperty("java.awt.headless");
 		try {
 			System.setProperty("java.awt.headless", "true");
 			printBanner(environment, out);
-		}
-		catch (Throwable ex) {
+		} catch (Throwable ex) {
 			logger.warn("Image banner not printable: " + this.image + " (" + ex.getClass()
 					+ ": '" + ex.getMessage() + "')");
 			logger.debug("Image banner printing failure", ex);
-		}
-		finally {
+		} finally {
 			if (headless == null) {
 				System.clearProperty("java.awt.headless");
-			}
-			else {
+			} else {
 				System.setProperty("java.awt.headless", headless);
 			}
 		}
@@ -107,8 +104,7 @@ public class ImageBanner implements Banner {
 		try {
 			BufferedImage image = ImageIO.read(inputStream);
 			return resizeImage(image, width, height);
-		}
-		finally {
+		} finally {
 			inputStream.close();
 		}
 	}
@@ -129,7 +125,7 @@ public class ImageBanner implements Banner {
 	}
 
 	private void printBanner(BufferedImage image, int margin, boolean invert,
-			PrintStream out) {
+							 PrintStream out) {
 		AnsiElement background = (invert ? AnsiBackground.BLACK : AnsiBackground.DEFAULT);
 		out.print(AnsiOutput.encode(AnsiColor.DEFAULT));
 		out.print(AnsiOutput.encode(background));

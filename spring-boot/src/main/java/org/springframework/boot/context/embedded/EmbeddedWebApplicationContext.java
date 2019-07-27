@@ -88,8 +88,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  */
 public class EmbeddedWebApplicationContext extends GenericWebApplicationContext {
 
-	private static final Log logger = LogFactory
-			.getLog(EmbeddedWebApplicationContext.class);
+	private static final Log logger = LogFactory.getLog(EmbeddedWebApplicationContext.class);
 
 	/**
 	 * Constant value for the DispatcherServlet bean name. A Servlet bean with this name
@@ -107,6 +106,7 @@ public class EmbeddedWebApplicationContext extends GenericWebApplicationContext 
 
 	/**
 	 * Register ServletContextAwareProcessor.
+	 *
 	 * @see ServletContextAwareProcessor
 	 */
 	@Override
@@ -120,8 +120,7 @@ public class EmbeddedWebApplicationContext extends GenericWebApplicationContext 
 	public final void refresh() throws BeansException, IllegalStateException {
 		try {
 			super.refresh();
-		}
-		catch (RuntimeException ex) {
+		} catch (RuntimeException ex) {
 			stopAndReleaseEmbeddedServletContainer();
 			throw ex;
 		}
@@ -132,8 +131,7 @@ public class EmbeddedWebApplicationContext extends GenericWebApplicationContext 
 		super.onRefresh();
 		try {
 			createEmbeddedServletContainer();
-		}
-		catch (Throwable ex) {
+		} catch (Throwable ex) {
 			throw new ApplicationContextException("Unable to start embedded container",
 					ex);
 		}
@@ -147,6 +145,7 @@ public class EmbeddedWebApplicationContext extends GenericWebApplicationContext 
 			publishEvent(
 					new EmbeddedServletContainerInitializedEvent(this, localContainer));
 		}
+
 	}
 
 	@Override
@@ -162,12 +161,10 @@ public class EmbeddedWebApplicationContext extends GenericWebApplicationContext 
 			EmbeddedServletContainerFactory containerFactory = getEmbeddedServletContainerFactory();
 			this.embeddedServletContainer = containerFactory
 					.getEmbeddedServletContainer(getSelfInitializer());
-		}
-		else if (localServletContext != null) {
+		} else if (localServletContext != null) {
 			try {
 				getSelfInitializer().onStartup(localServletContext);
-			}
-			catch (ServletException ex) {
+			} catch (ServletException ex) {
 				throw new ApplicationContextException("Cannot initialize servlet context",
 						ex);
 			}
@@ -179,6 +176,7 @@ public class EmbeddedWebApplicationContext extends GenericWebApplicationContext 
 	 * Returns the {@link EmbeddedServletContainerFactory} that should be used to create
 	 * the embedded servlet container. By default this method searches for a suitable bean
 	 * in the context itself.
+	 *
 	 * @return a {@link EmbeddedServletContainerFactory} (never {@code null})
 	 */
 	protected EmbeddedServletContainerFactory getEmbeddedServletContainerFactory() {
@@ -203,6 +201,7 @@ public class EmbeddedWebApplicationContext extends GenericWebApplicationContext 
 	/**
 	 * Returns the {@link ServletContextInitializer} that will be used to complete the
 	 * setup of this {@link WebApplicationContext}.
+	 *
 	 * @return the self initializer
 	 * @see #prepareEmbeddedWebApplicationContext(ServletContext)
 	 */
@@ -235,6 +234,7 @@ public class EmbeddedWebApplicationContext extends GenericWebApplicationContext 
 	 * Servlet context. By default this method will first attempt to find
 	 * {@link ServletContextInitializer}, {@link Servlet}, {@link Filter} and certain
 	 * {@link EventListener} beans.
+	 *
 	 * @return the servlet initializer beans
 	 */
 	protected Collection<ServletContextInitializer> getServletContextInitializerBeans() {
@@ -246,6 +246,7 @@ public class EmbeddedWebApplicationContext extends GenericWebApplicationContext 
 	 * {@link ServletContext}. This method is usually called from
 	 * {@link ServletContextInitializer#onStartup(ServletContext)} and is similar to the
 	 * functionality usually provided by a {@link ContextLoaderListener}.
+	 *
 	 * @param servletContext the operational servlet context
 	 */
 	protected void prepareEmbeddedWebApplicationContext(ServletContext servletContext) {
@@ -276,14 +277,12 @@ public class EmbeddedWebApplicationContext extends GenericWebApplicationContext 
 				logger.info("Root WebApplicationContext: initialization completed in "
 						+ elapsedTime + " ms");
 			}
-		}
-		catch (RuntimeException ex) {
+		} catch (RuntimeException ex) {
 			logger.error("Context initialization failed", ex);
 			servletContext.setAttribute(
 					WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, ex);
 			throw ex;
-		}
-		catch (Error ex) {
+		} catch (Error ex) {
 			logger.error("Context initialization failed", ex);
 			servletContext.setAttribute(
 					WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, ex);
@@ -305,8 +304,7 @@ public class EmbeddedWebApplicationContext extends GenericWebApplicationContext 
 			try {
 				localContainer.stop();
 				this.embeddedServletContainer = null;
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				throw new IllegalStateException(ex);
 			}
 		}
@@ -343,6 +341,7 @@ public class EmbeddedWebApplicationContext extends GenericWebApplicationContext 
 	/**
 	 * Returns the {@link EmbeddedServletContainer} that was created by the context or
 	 * {@code null} if the container has not yet been created.
+	 *
 	 * @return the embedded servlet container
 	 */
 	public EmbeddedServletContainer getEmbeddedServletContainer() {

@@ -39,6 +39,7 @@ public class ResourceNotFoundException extends RuntimeException {
 
 	/**
 	 * Return the name of the property that defines the resource.
+	 *
 	 * @return the property
 	 */
 	public String getPropertyName() {
@@ -47,6 +48,7 @@ public class ResourceNotFoundException extends RuntimeException {
 
 	/**
 	 * Return the {@link Resource}.
+	 *
 	 * @return the resource
 	 */
 	public Resource getResource() {

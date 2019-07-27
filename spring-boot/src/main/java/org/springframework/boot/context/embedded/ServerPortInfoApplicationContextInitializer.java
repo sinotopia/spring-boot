@@ -81,7 +81,7 @@ public class ServerPortInfoApplicationContextInitializer
 	}
 
 	private void setPortProperty(ApplicationContext context, String propertyName,
-			int port) {
+								 int port) {
 		if (context instanceof ConfigurableApplicationContext) {
 			setPortProperty(((ConfigurableApplicationContext) context).getEnvironment(),
 					propertyName, port);
@@ -93,7 +93,7 @@ public class ServerPortInfoApplicationContextInitializer
 
 	@SuppressWarnings("unchecked")
 	private void setPortProperty(ConfigurableEnvironment environment, String propertyName,
-			int port) {
+								 int port) {
 		MutablePropertySources sources = environment.getPropertySources();
 		PropertySource<?> source = sources.get("server.ports");
 		if (source == null) {

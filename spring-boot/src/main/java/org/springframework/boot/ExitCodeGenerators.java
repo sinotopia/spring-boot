@@ -43,7 +43,7 @@ class ExitCodeGenerators implements Iterable<ExitCodeGenerator> {
 	}
 
 	public void addAll(Throwable exception,
-			Iterable<? extends ExitCodeExceptionMapper> mappers) {
+					   Iterable<? extends ExitCodeExceptionMapper> mappers) {
 		Assert.notNull(exception, "Exception must not be null");
 		Assert.notNull(mappers, "Mappers must not be null");
 		for (ExitCodeExceptionMapper mapper : mappers) {
@@ -81,6 +81,7 @@ class ExitCodeGenerators implements Iterable<ExitCodeGenerator> {
 
 	/**
 	 * Get the final exit code that should be returned based on all contained generators.
+	 *
 	 * @return the final exit code.
 	 */
 	public int getExitCode() {
@@ -91,8 +92,7 @@ class ExitCodeGenerators implements Iterable<ExitCodeGenerator> {
 				if (value > 0 && value > exitCode || value < 0 && value < exitCode) {
 					exitCode = value;
 				}
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				exitCode = (exitCode == 0 ? 1 : exitCode);
 				ex.printStackTrace();
 			}

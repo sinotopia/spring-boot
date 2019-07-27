@@ -49,11 +49,10 @@ public class FileSessionPersistence implements SessionPersistenceManager {
 
 	@Override
 	public void persistSessions(String deploymentName,
-			Map<String, PersistentSession> sessionData) {
+								Map<String, PersistentSession> sessionData) {
 		try {
 			save(sessionData, getSessionFile(deploymentName));
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			UndertowServletLogger.ROOT_LOGGER.failedToPersistSessions(ex);
 		}
 	}
@@ -63,14 +62,13 @@ public class FileSessionPersistence implements SessionPersistenceManager {
 		ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(file));
 		try {
 			save(sessionData, stream);
-		}
-		finally {
+		} finally {
 			stream.close();
 		}
 	}
 
 	private void save(Map<String, PersistentSession> sessionData,
-			ObjectOutputStream stream) throws IOException {
+					  ObjectOutputStream stream) throws IOException {
 		Map<String, Serializable> session = new LinkedHashMap<String, Serializable>();
 		for (Map.Entry<String, PersistentSession> entry : sessionData.entrySet()) {
 			session.put(entry.getKey(),
@@ -81,14 +79,13 @@ public class FileSessionPersistence implements SessionPersistenceManager {
 
 	@Override
 	public Map<String, PersistentSession> loadSessionAttributes(String deploymentName,
-			final ClassLoader classLoader) {
+																final ClassLoader classLoader) {
 		try {
 			File file = getSessionFile(deploymentName);
 			if (file.exists()) {
 				return load(file, classLoader);
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			UndertowServletLogger.ROOT_LOGGER.failedtoLoadPersistentSessions(ex);
 		}
 		return null;
@@ -100,8 +97,7 @@ public class FileSessionPersistence implements SessionPersistenceManager {
 				new FileInputStream(file), classLoader);
 		try {
 			return load(stream);
-		}
-		finally {
+		} finally {
 			stream.close();
 		}
 	}

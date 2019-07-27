@@ -54,6 +54,7 @@ final class EnvironmentConverter {
 	/**
 	 * Creates a new {@link EnvironmentConverter} that will use the given
 	 * {@code classLoader} during conversion.
+	 *
 	 * @param classLoader the class loader to use
 	 */
 	EnvironmentConverter(ClassLoader classLoader) {
@@ -65,6 +66,7 @@ final class EnvironmentConverter {
 	 * environment is already a {@code StandardEnvironment} and is not a
 	 * {@link ConfigurableWebEnvironment} no conversion is performed and it is returned
 	 * unchanged.
+	 *
 	 * @param environment The Environment to convert
 	 * @return The converted Environment
 	 */
@@ -78,13 +80,12 @@ final class EnvironmentConverter {
 	}
 
 	private boolean isWebEnvironment(ConfigurableEnvironment environment,
-			ClassLoader classLoader) {
+									 ClassLoader classLoader) {
 		try {
 			Class<?> webEnvironmentClass = ClassUtils
 					.forName(CONFIGURABLE_WEB_ENVIRONMENT_CLASS, classLoader);
 			return (webEnvironmentClass.isInstance(environment));
-		}
-		catch (Throwable ex) {
+		} catch (Throwable ex) {
 			return false;
 		}
 	}
@@ -99,7 +100,7 @@ final class EnvironmentConverter {
 	}
 
 	private void copyNonServletPropertySources(ConfigurableEnvironment source,
-			StandardEnvironment target) {
+											   StandardEnvironment target) {
 		removeAllPropertySources(target.getPropertySources());
 		for (PropertySource<?> propertySource : source.getPropertySources()) {
 			if (!SERVLET_ENVIRONMENT_SOURCE_NAMES.contains(propertySource.getName())) {

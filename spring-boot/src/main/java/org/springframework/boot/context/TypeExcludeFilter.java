@@ -58,7 +58,7 @@ public class TypeExcludeFilter implements TypeFilter, BeanFactoryAware {
 
 	@Override
 	public boolean match(MetadataReader metadataReader,
-			MetadataReaderFactory metadataReaderFactory) throws IOException {
+						 MetadataReaderFactory metadataReaderFactory) throws IOException {
 		if (this.beanFactory instanceof ListableBeanFactory
 				&& getClass().equals(TypeExcludeFilter.class)) {
 			Collection<TypeExcludeFilter> delegates = ((ListableBeanFactory) this.beanFactory)

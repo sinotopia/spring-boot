@@ -38,7 +38,7 @@ class SpringApplicationRunListeners {
 	private final List<SpringApplicationRunListener> listeners;
 
 	SpringApplicationRunListeners(Log log,
-			Collection<? extends SpringApplicationRunListener> listeners) {
+								  Collection<? extends SpringApplicationRunListener> listeners) {
 		this.log = log;
 		this.listeners = new ArrayList<SpringApplicationRunListener>(listeners);
 	}
@@ -74,18 +74,16 @@ class SpringApplicationRunListeners {
 	}
 
 	private void callFinishedListener(SpringApplicationRunListener listener,
-			ConfigurableApplicationContext context, Throwable exception) {
+									  ConfigurableApplicationContext context, Throwable exception) {
 		try {
 			listener.finished(context, exception);
-		}
-		catch (Throwable ex) {
+		} catch (Throwable ex) {
 			if (exception == null) {
 				ReflectionUtils.rethrowRuntimeException(ex);
 			}
 			if (this.log.isDebugEnabled()) {
 				this.log.error("Error handling failed", ex);
-			}
-			else {
+			} else {
 				String message = ex.getMessage();
 				message = (message == null ? "no error message" : message);
 				this.log.warn("Error handling failed (" + message + ")");

@@ -45,8 +45,7 @@ public class ApplicationPid {
 		try {
 			String jvmName = ManagementFactory.getRuntimeMXBean().getName();
 			return jvmName.split("@")[0];
-		}
-		catch (Throwable ex) {
+		} catch (Throwable ex) {
 			return null;
 		}
 	}
@@ -74,9 +73,10 @@ public class ApplicationPid {
 
 	/**
 	 * Write the PID to the specified file.
+	 *
 	 * @param file the PID file
 	 * @throws IllegalStateException if no PID is available.
-	 * @throws IOException if the file cannot be written
+	 * @throws IOException           if the file cannot be written
 	 */
 	public void write(File file) throws IOException {
 		Assert.state(this.pid != null, "No PID available");
@@ -84,8 +84,7 @@ public class ApplicationPid {
 		FileWriter writer = new FileWriter(file);
 		try {
 			writer.append(this.pid);
-		}
-		finally {
+		} finally {
 			writer.close();
 		}
 	}

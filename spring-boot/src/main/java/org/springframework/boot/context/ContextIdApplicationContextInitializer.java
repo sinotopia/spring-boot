@@ -85,6 +85,7 @@ public class ContextIdApplicationContextInitializer implements
 
 	/**
 	 * Create a new {@link ContextIdApplicationContextInitializer} instance.
+	 *
 	 * @param name the name of the application (can include placeholders)
 	 */
 	public ContextIdApplicationContextInitializer(String name) {

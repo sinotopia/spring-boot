@@ -42,7 +42,7 @@ class SpringApplicationBannerPrinter {
 
 	static final String DEFAULT_BANNER_LOCATION = "banner.txt";
 
-	static final String[] IMAGE_EXTENSION = { "gif", "jpg", "png" };
+	static final String[] IMAGE_EXTENSION = {"gif", "jpg", "png"};
 
 	private static final Banner DEFAULT_BANNER = new SpringBootBanner();
 
@@ -59,8 +59,7 @@ class SpringApplicationBannerPrinter {
 		Banner banner = getBanner(environment, this.fallbackBanner);
 		try {
 			logger.info(createStringFromBanner(banner, environment, sourceClass));
-		}
-		catch (UnsupportedEncodingException ex) {
+		} catch (UnsupportedEncodingException ex) {
 			logger.warn("Failed to create String for banner", ex);
 		}
 		return new PrintedBanner(banner, sourceClass);
@@ -111,7 +110,7 @@ class SpringApplicationBannerPrinter {
 	}
 
 	private String createStringFromBanner(Banner banner, Environment environment,
-			Class<?> mainApplicationClass) throws UnsupportedEncodingException {
+										  Class<?> mainApplicationClass) throws UnsupportedEncodingException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		banner.printBanner(environment, mainApplicationClass, new PrintStream(baos));
 		String charset = environment.getProperty("banner.charset", "UTF-8");
@@ -137,7 +136,7 @@ class SpringApplicationBannerPrinter {
 
 		@Override
 		public void printBanner(Environment environment, Class<?> sourceClass,
-				PrintStream out) {
+								PrintStream out) {
 			for (Banner banner : this.banners) {
 				banner.printBanner(environment, sourceClass, out);
 			}
@@ -162,7 +161,7 @@ class SpringApplicationBannerPrinter {
 
 		@Override
 		public void printBanner(Environment environment, Class<?> sourceClass,
-				PrintStream out) {
+								PrintStream out) {
 			sourceClass = (sourceClass == null ? this.sourceClass : sourceClass);
 			this.banner.printBanner(environment, sourceClass, out);
 		}

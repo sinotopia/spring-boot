@@ -100,8 +100,8 @@ import org.springframework.util.ResourceUtils;
  * @author Andy Wilkinson
  * @author Marcos Barbero
  * @author Eddú Meléndez
- * @since 1.2.0
  * @see UndertowEmbeddedServletContainer
+ * @since 1.2.0
  */
 public class UndertowEmbeddedServletContainerFactory
 		extends AbstractEmbeddedServletContainerFactory implements ResourceLoaderAware {
@@ -147,6 +147,7 @@ public class UndertowEmbeddedServletContainerFactory
 	/**
 	 * Create a new {@link UndertowEmbeddedServletContainerFactory} that listens for
 	 * requests using the specified port.
+	 *
 	 * @param port the port to listen on
 	 */
 	public UndertowEmbeddedServletContainerFactory(int port) {
@@ -157,8 +158,9 @@ public class UndertowEmbeddedServletContainerFactory
 	/**
 	 * Create a new {@link UndertowEmbeddedServletContainerFactory} with the specified
 	 * context path and port.
+	 *
 	 * @param contextPath the root context path
-	 * @param port the port to listen on
+	 * @param port        the port to listen on
 	 */
 	public UndertowEmbeddedServletContainerFactory(String contextPath, int port) {
 		super(contextPath, port);
@@ -168,6 +170,7 @@ public class UndertowEmbeddedServletContainerFactory
 	/**
 	 * Set {@link UndertowBuilderCustomizer}s that should be applied to the Undertow
 	 * {@link Builder}. Calling this method will replace any existing customizers.
+	 *
 	 * @param customizers the customizers to set
 	 */
 	public void setBuilderCustomizers(
@@ -179,6 +182,7 @@ public class UndertowEmbeddedServletContainerFactory
 	/**
 	 * Returns a mutable collection of the {@link UndertowBuilderCustomizer}s that will be
 	 * applied to the Undertow {@link Builder} .
+	 *
 	 * @return the customizers that will be applied
 	 */
 	public Collection<UndertowBuilderCustomizer> getBuilderCustomizers() {
@@ -188,6 +192,7 @@ public class UndertowEmbeddedServletContainerFactory
 	/**
 	 * Add {@link UndertowBuilderCustomizer}s that should be used to customize the
 	 * Undertow {@link Builder}.
+	 *
 	 * @param customizers the customizers to add
 	 */
 	public void addBuilderCustomizers(UndertowBuilderCustomizer... customizers) {
@@ -199,6 +204,7 @@ public class UndertowEmbeddedServletContainerFactory
 	 * Set {@link UndertowDeploymentInfoCustomizer}s that should be applied to the
 	 * Undertow {@link DeploymentInfo}. Calling this method will replace any existing
 	 * customizers.
+	 *
 	 * @param customizers the customizers to set
 	 */
 	public void setDeploymentInfoCustomizers(
@@ -211,6 +217,7 @@ public class UndertowEmbeddedServletContainerFactory
 	/**
 	 * Returns a mutable collection of the {@link UndertowDeploymentInfoCustomizer}s that
 	 * will be applied to the Undertow {@link DeploymentInfo} .
+	 *
 	 * @return the customizers that will be applied
 	 */
 	public Collection<UndertowDeploymentInfoCustomizer> getDeploymentInfoCustomizers() {
@@ -220,6 +227,7 @@ public class UndertowEmbeddedServletContainerFactory
 	/**
 	 * Add {@link UndertowDeploymentInfoCustomizer}s that should be used to customize the
 	 * Undertow {@link DeploymentInfo}.
+	 *
 	 * @param customizers the customizers to add
 	 */
 	public void addDeploymentInfoCustomizers(
@@ -253,8 +261,7 @@ public class UndertowEmbeddedServletContainerFactory
 		}
 		if (getSsl() != null && getSsl().isEnabled()) {
 			configureSsl(getSsl(), port, builder);
-		}
-		else {
+		} else {
 			builder.addHttpListener(port, getListenAddress());
 		}
 		for (UndertowBuilderCustomizer customizer : this.builderCustomizers) {
@@ -278,11 +285,9 @@ public class UndertowEmbeddedServletContainerFactory
 				builder.setSocketOption(Options.SSL_ENABLED_CIPHER_SUITES,
 						Sequence.of(ssl.getCiphers()));
 			}
-		}
-		catch (NoSuchAlgorithmException ex) {
+		} catch (NoSuchAlgorithmException ex) {
 			throw new IllegalStateException(ex);
-		}
-		catch (KeyManagementException ex) {
+		} catch (KeyManagementException ex) {
 			throw new IllegalStateException(ex);
 		}
 	}
@@ -321,14 +326,13 @@ public class UndertowEmbeddedServletContainerFactory
 						keyManagerFactory.getKeyManagers());
 			}
 			return keyManagerFactory.getKeyManagers();
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			throw new IllegalStateException(ex);
 		}
 	}
 
 	private KeyManager[] getConfigurableAliasKeyManagers(Ssl ssl,
-			KeyManager[] keyManagers) {
+														 KeyManager[] keyManagers) {
 		for (int i = 0; i < keyManagers.length; i++) {
 			if (keyManagers[i] instanceof X509ExtendedKeyManager) {
 				keyManagers[i] = new ConfigurableAliasKeyManager(
@@ -354,8 +358,7 @@ public class UndertowEmbeddedServletContainerFactory
 					.getInstance(TrustManagerFactory.getDefaultAlgorithm());
 			trustManagerFactory.init(store);
 			return trustManagerFactory.getTrustManagers();
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			throw new IllegalStateException(ex);
 		}
 	}
@@ -439,8 +442,7 @@ public class UndertowEmbeddedServletContainerFactory
 					: "common";
 			return new AccessLogHandler(handler, accessLogReceiver, formatString,
 					Undertow.class.getClassLoader());
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			throw new IllegalStateException("Failed to create AccessLogHandler", ex);
 		}
 	}
@@ -498,17 +500,14 @@ public class UndertowEmbeddedServletContainerFactory
 				if (file.isFile()) {
 					try {
 						resourceJarUrls.add(new URL("jar:" + url + "!/"));
-					}
-					catch (MalformedURLException ex) {
+					} catch (MalformedURLException ex) {
 						throw new RuntimeException(ex);
 					}
-				}
-				else {
+				} else {
 					resourceManagers.add(new FileResourceManager(
 							new File(file, "META-INF/resources"), 0));
 				}
-			}
-			else {
+			} else {
 				resourceJarUrls.add(url);
 			}
 		}
@@ -521,6 +520,7 @@ public class UndertowEmbeddedServletContainerFactory
 	 * Return the document root in canonical form. Undertow uses File#getCanonicalFile()
 	 * to determine whether a resource has been requested using the proper case but on
 	 * Windows {@code java.io.tmpdir} may be set as a tilde-compressed pathname.
+	 *
 	 * @return the canonical document root
 	 */
 	private File getCanonicalDocumentRoot() {
@@ -528,8 +528,7 @@ public class UndertowEmbeddedServletContainerFactory
 			File root = getValidDocumentRoot();
 			root = (root != null ? root : createTempDir("undertow-docbase"));
 			return root.getCanonicalFile();
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			throw new IllegalStateException("Cannot get canonical document root", e);
 		}
 	}
@@ -564,9 +563,10 @@ public class UndertowEmbeddedServletContainerFactory
 	 * Subclasses can override this method to return a different
 	 * {@link UndertowEmbeddedServletContainer} or apply additional processing to the
 	 * {@link Builder} and {@link DeploymentManager} used to bootstrap Undertow
+	 *
 	 * @param builder the builder
 	 * @param manager the deployment manager
-	 * @param port the port that Undertow should listen on
+	 * @param port    the port that Undertow should listen on
 	 * @return a new {@link UndertowEmbeddedServletContainer} instance
 	 */
 	protected UndertowEmbeddedServletContainer getUndertowEmbeddedServletContainer(
@@ -639,6 +639,7 @@ public class UndertowEmbeddedServletContainerFactory
 
 	/**
 	 * Set if x-forward-* headers should be processed.
+	 *
 	 * @param useForwardHeaders if x-forward headers should be used
 	 * @since 1.3.0
 	 */
@@ -696,8 +697,7 @@ public class UndertowEmbeddedServletContainerFactory
 					return null;
 				}
 				return resource;
-			}
-			catch (MalformedURLException ex) {
+			} catch (MalformedURLException ex) {
 				return null;
 			}
 		}
@@ -740,14 +740,14 @@ public class UndertowEmbeddedServletContainerFactory
 
 		@Override
 		public String chooseEngineClientAlias(String[] strings, Principal[] principals,
-				SSLEngine sslEngine) {
+											  SSLEngine sslEngine) {
 			return this.keyManager.chooseEngineClientAlias(strings, principals,
 					sslEngine);
 		}
 
 		@Override
 		public String chooseEngineServerAlias(String s, Principal[] principals,
-				SSLEngine sslEngine) {
+											  SSLEngine sslEngine) {
 			if (this.alias == null) {
 				return this.keyManager.chooseEngineServerAlias(s, principals, sslEngine);
 			}
@@ -756,13 +756,13 @@ public class UndertowEmbeddedServletContainerFactory
 
 		@Override
 		public String chooseClientAlias(String[] keyType, Principal[] issuers,
-				Socket socket) {
+										Socket socket) {
 			return this.keyManager.chooseClientAlias(keyType, issuers, socket);
 		}
 
 		@Override
 		public String chooseServerAlias(String keyType, Principal[] issuers,
-				Socket socket) {
+										Socket socket) {
 			return this.keyManager.chooseServerAlias(keyType, issuers, socket);
 		}
 

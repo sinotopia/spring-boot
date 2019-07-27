@@ -36,6 +36,7 @@ public interface EmbeddedServletContainerCustomizer {
 
 	/**
 	 * Customize the specified {@link ConfigurableEmbeddedServletContainer}.
+	 *
 	 * @param container the container to customize
 	 */
 	void customize(ConfigurableEmbeddedServletContainer container);

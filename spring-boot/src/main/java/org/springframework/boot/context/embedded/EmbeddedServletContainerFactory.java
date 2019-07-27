@@ -40,8 +40,9 @@ public interface EmbeddedServletContainerFactory {
 	 * Clients should not be able to connect to the returned server until
 	 * {@link EmbeddedServletContainer#start()} is called (which happens when the
 	 * {@link ApplicationContext} has been fully refreshed).
+	 *
 	 * @param initializers {@link ServletContextInitializer}s that should be applied as
-	 * the container starts
+	 *                     the container starts
 	 * @return a fully configured and started {@link EmbeddedServletContainer}
 	 * @see EmbeddedServletContainer#stop()
 	 */

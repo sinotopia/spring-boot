@@ -71,8 +71,9 @@ class BeanDefinitionLoader {
 	/**
 	 * Create a new {@link BeanDefinitionLoader} that will load beans into the specified
 	 * {@link BeanDefinitionRegistry}.
+	 *
 	 * @param registry the bean definition registry that will contain the loaded beans
-	 * @param sources the bean sources
+	 * @param sources  the bean sources
 	 */
 	BeanDefinitionLoader(BeanDefinitionRegistry registry, Object... sources) {
 		Assert.notNull(registry, "Registry must not be null");
@@ -89,6 +90,7 @@ class BeanDefinitionLoader {
 
 	/**
 	 * Set the bean name generator to be used by the underlying readers and scanner.
+	 *
 	 * @param beanNameGenerator the bean name generator
 	 */
 	public void setBeanNameGenerator(BeanNameGenerator beanNameGenerator) {
@@ -99,6 +101,7 @@ class BeanDefinitionLoader {
 
 	/**
 	 * Set the resource loader to be used by the underlying readers and scanner.
+	 *
 	 * @param resourceLoader the resource loader
 	 */
 	public void setResourceLoader(ResourceLoader resourceLoader) {
@@ -109,6 +112,7 @@ class BeanDefinitionLoader {
 
 	/**
 	 * Set the environment to be used by the underlying readers and scanner.
+	 *
 	 * @param environment the environment
 	 */
 	public void setEnvironment(ConfigurableEnvironment environment) {
@@ -119,6 +123,7 @@ class BeanDefinitionLoader {
 
 	/**
 	 * Load the sources into the reader.
+	 *
 	 * @return the number of loaded beans
 	 */
 	public int load() {
@@ -190,11 +195,9 @@ class BeanDefinitionLoader {
 		// Attempt as a Class
 		try {
 			return load(ClassUtils.forName(resolvedSource, null));
-		}
-		catch (IllegalArgumentException ex) {
+		} catch (IllegalArgumentException ex) {
 			// swallow exception and continue
-		}
-		catch (ClassNotFoundException ex) {
+		} catch (ClassNotFoundException ex) {
 			// swallow exception and continue
 		}
 		// Attempt as resources
@@ -229,9 +232,8 @@ class BeanDefinitionLoader {
 			if (loader instanceof ResourcePatternResolver) {
 				return ((ResourcePatternResolver) loader).getResources(source);
 			}
-			return new Resource[] { loader.getResource(source) };
-		}
-		catch (IOException ex) {
+			return new Resource[]{loader.getResource(source)};
+		} catch (IOException ex) {
 			throw new IllegalStateException("Error reading source '" + source + "'");
 		}
 	}
@@ -249,8 +251,7 @@ class BeanDefinitionLoader {
 			if (path.indexOf(".") == -1) {
 				try {
 					return Package.getPackage(path) == null;
-				}
-				catch (Exception ex) {
+				} catch (Exception ex) {
 					// Ignore
 				}
 			}
@@ -276,8 +277,7 @@ class BeanDefinitionLoader {
 				load(Class.forName(source.toString() + "." + className));
 				break;
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			// swallow exception and continue
 		}
 		return Package.getPackage(source.toString());

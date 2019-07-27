@@ -83,9 +83,9 @@ public class ConfigurationPropertiesBindingPostProcessor implements BeanPostProc
 	 */
 	public static final String VALIDATOR_BEAN_NAME = "configurationPropertiesValidator";
 
-	private static final String[] VALIDATOR_CLASSES = { "javax.validation.Validator",
+	private static final String[] VALIDATOR_CLASSES = {"javax.validation.Validator",
 			"javax.validation.ValidatorFactory",
-			"javax.validation.bootstrap.GenericBootstrap" };
+			"javax.validation.bootstrap.GenericBootstrap"};
 
 	private static final Log logger = LogFactory
 			.getLog(ConfigurationPropertiesBindingPostProcessor.class);
@@ -117,6 +117,7 @@ public class ConfigurationPropertiesBindingPostProcessor implements BeanPostProc
 	/**
 	 * A list of custom converters (in addition to the defaults) to use when converting
 	 * properties for binding.
+	 *
 	 * @param converters the converters to set
 	 */
 	@Autowired(required = false)
@@ -128,6 +129,7 @@ public class ConfigurationPropertiesBindingPostProcessor implements BeanPostProc
 	/**
 	 * A list of custom converters (in addition to the defaults) to use when converting
 	 * properties for binding.
+	 *
 	 * @param converters the converters to set
 	 */
 	@Autowired(required = false)
@@ -138,6 +140,7 @@ public class ConfigurationPropertiesBindingPostProcessor implements BeanPostProc
 
 	/**
 	 * Set the order of the bean.
+	 *
 	 * @param order the order
 	 */
 	public void setOrder(int order) {
@@ -146,6 +149,7 @@ public class ConfigurationPropertiesBindingPostProcessor implements BeanPostProc
 
 	/**
 	 * Return the order of the bean.
+	 *
 	 * @return the order
 	 */
 	@Override
@@ -155,6 +159,7 @@ public class ConfigurationPropertiesBindingPostProcessor implements BeanPostProc
 
 	/**
 	 * Set the property sources to bind.
+	 *
 	 * @param propertySources the property sources
 	 */
 	public void setPropertySources(PropertySources propertySources) {
@@ -163,6 +168,7 @@ public class ConfigurationPropertiesBindingPostProcessor implements BeanPostProc
 
 	/**
 	 * Set the bean validator used to validate property fields.
+	 *
 	 * @param validator the validator
 	 */
 	public void setValidator(Validator validator) {
@@ -171,6 +177,7 @@ public class ConfigurationPropertiesBindingPostProcessor implements BeanPostProc
 
 	/**
 	 * Set the conversion service used to convert property values.
+	 *
 	 * @param conversionService the conversion service
 	 */
 	public void setConversionService(ConversionService conversionService) {
@@ -179,6 +186,7 @@ public class ConfigurationPropertiesBindingPostProcessor implements BeanPostProc
 
 	/**
 	 * Set the bean meta-data store.
+	 *
 	 * @param beans the bean meta data store
 	 */
 	public void setBeanMetaDataStore(ConfigurationBeanFactoryMetaData beans) {
@@ -232,8 +240,7 @@ public class ConfigurationPropertiesBindingPostProcessor implements BeanPostProc
 			if (validator != null) {
 				((DisposableBean) validator).destroy();
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			throw new IllegalStateException(ex);
 		}
 	}
@@ -277,8 +284,7 @@ public class ConfigurationPropertiesBindingPostProcessor implements BeanPostProc
 	private <T> T getOptionalBean(String name, Class<T> type) {
 		try {
 			return this.beanFactory.getBean(name, type);
-		}
-		catch (NoSuchBeanDefinitionException ex) {
+		} catch (NoSuchBeanDefinitionException ex) {
 			return null;
 		}
 	}
@@ -307,7 +313,7 @@ public class ConfigurationPropertiesBindingPostProcessor implements BeanPostProc
 
 	@SuppressWarnings("deprecation")
 	private void postProcessBeforeInitialization(Object bean, String beanName,
-			ConfigurationProperties annotation) {
+												 ConfigurationProperties annotation) {
 		Object target = bean;
 		PropertiesConfigurationFactory<Object> factory = new PropertiesConfigurationFactory<Object>(
 				target);
@@ -328,8 +334,7 @@ public class ConfigurationPropertiesBindingPostProcessor implements BeanPostProc
 		}
 		try {
 			factory.bindPropertiesToTarget();
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			String targetClass = ClassUtils.getShortName(target.getClass());
 			throw new BeanCreationException(beanName, "Could not bind properties to "
 					+ targetClass + " (" + getAnnotationDetails(annotation) + ")", ex);
@@ -506,15 +511,14 @@ public class ConfigurationPropertiesBindingPostProcessor implements BeanPostProc
 		}
 
 		private void flattenPropertySources(PropertySource<?> propertySource,
-				MutablePropertySources result) {
+											MutablePropertySources result) {
 			Object source = propertySource.getSource();
 			if (source instanceof ConfigurableEnvironment) {
 				ConfigurableEnvironment environment = (ConfigurableEnvironment) source;
 				for (PropertySource<?> childSource : environment.getPropertySources()) {
 					flattenPropertySources(childSource, result);
 				}
-			}
-			else {
+			} else {
 				result.addLast(propertySource);
 			}
 		}

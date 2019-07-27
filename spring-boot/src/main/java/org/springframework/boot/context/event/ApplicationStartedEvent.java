@@ -37,8 +37,9 @@ public class ApplicationStartedEvent extends ApplicationStartingEvent {
 
 	/**
 	 * Create a new {@link ApplicationStartedEvent} instance.
+	 *
 	 * @param application the current application
-	 * @param args the arguments the application is running with
+	 * @param args        the arguments the application is running with
 	 */
 	public ApplicationStartedEvent(SpringApplication application, String[] args) {
 		super(application, args);

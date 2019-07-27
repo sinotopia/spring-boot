@@ -22,13 +22,14 @@ import io.undertow.servlet.api.DeploymentInfo;
  * Callback interface that can be used to customize an Undertow {@link DeploymentInfo}.
  *
  * @author Phillip Webb
- * @since 1.2.0
  * @see UndertowEmbeddedServletContainerFactory
+ * @since 1.2.0
  */
 public interface UndertowDeploymentInfoCustomizer {
 
 	/**
 	 * Customize the deployment info.
+	 *
 	 * @param deploymentInfo the {@code DeploymentInfo} to customize
 	 */
 	void customize(DeploymentInfo deploymentInfo);

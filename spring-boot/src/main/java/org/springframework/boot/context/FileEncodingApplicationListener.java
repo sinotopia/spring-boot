@@ -46,8 +46,7 @@ import org.springframework.core.Ordered;
 public class FileEncodingApplicationListener
 		implements ApplicationListener<ApplicationEnvironmentPreparedEvent>, Ordered {
 
-	private static final Log logger = LogFactory
-			.getLog(FileEncodingApplicationListener.class);
+	private static final Log logger = LogFactory.getLog(FileEncodingApplicationListener.class);
 
 	@Override
 	public int getOrder() {

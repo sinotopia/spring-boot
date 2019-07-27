@@ -33,6 +33,7 @@ public interface EmbeddedServletContainer {
 	/**
 	 * Starts the embedded servlet container. Calling this method on an already started
 	 * container has no effect.
+	 *
 	 * @throws EmbeddedServletContainerException if the container cannot be started
 	 */
 	void start() throws EmbeddedServletContainerException;
@@ -40,12 +41,14 @@ public interface EmbeddedServletContainer {
 	/**
 	 * Stops the embedded servlet container. Calling this method on an already stopped
 	 * container has no effect.
+	 *
 	 * @throws EmbeddedServletContainerException if the container cannot be stopped
 	 */
 	void stop() throws EmbeddedServletContainerException;
 
 	/**
 	 * Return the port this server is listening on.
+	 *
 	 * @return the port (or -1 if none)
 	 */
 	int getPort();

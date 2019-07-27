@@ -41,7 +41,7 @@ public class ConfigurationPropertiesBindingPostProcessorRegistrar
 
 	@Override
 	public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata,
-			BeanDefinitionRegistry registry) {
+										BeanDefinitionRegistry registry) {
 		if (!registry.containsBeanDefinition(BINDER_BEAN_NAME)) {
 			BeanDefinitionBuilder meta = BeanDefinitionBuilder
 					.genericBeanDefinition(ConfigurationBeanFactoryMetaData.class);
